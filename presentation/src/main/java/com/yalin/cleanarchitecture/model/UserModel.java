@@ -14,34 +14,13 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.internal.di.modules;
-
-import android.content.Context;
-
-import com.yalin.cleanarchitecture.AndroidApplication;
-
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
+package com.yalin.cleanarchitecture.model;
 
 /**
- * Dagger module that provides objects which will live during the application lifecycle.
+ * Class that represents a user in the presentation layer.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-@Module
-public class ApplicationModule {
-    private final AndroidApplication application;
-
-    public ApplicationModule(AndroidApplication application) {
-        this.application = application;
-    }
-
-    @Provides
-    @Singleton
-    public Context provideApplicationContext() {
-        return this.application;
-    }
+public class UserModel {
 }

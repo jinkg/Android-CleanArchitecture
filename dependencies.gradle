@@ -18,6 +18,7 @@ ext {
     presentationDependencies = [
             supportLib         : "com.android.support:appcompat-v7:${androidSupportVersion}",
             constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            recyclerView       : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",

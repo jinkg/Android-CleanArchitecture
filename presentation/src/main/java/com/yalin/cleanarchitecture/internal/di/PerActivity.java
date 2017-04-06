@@ -14,34 +14,23 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.internal.di.modules;
+package com.yalin.cleanarchitecture.internal.di;
 
-import android.content.Context;
+import java.lang.annotation.Retention;
 
-import com.yalin.cleanarchitecture.AndroidApplication;
+import javax.inject.Scope;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Dagger module that provides objects which will live during the application lifecycle.
+ * A scoping annotation to permit objects whose lifetime should
+ * conform to the life of the activity to be memorized in the
+ * correct component.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-@Module
-public class ApplicationModule {
-    private final AndroidApplication application;
-
-    public ApplicationModule(AndroidApplication application) {
-        this.application = application;
-    }
-
-    @Provides
-    @Singleton
-    public Context provideApplicationContext() {
-        return this.application;
-    }
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {
 }

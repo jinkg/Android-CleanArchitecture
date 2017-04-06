@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.yalin.cleanarchitecture.AndroidApplication;
 import com.yalin.cleanarchitecture.internal.di.components.ApplicationComponent;
+import com.yalin.cleanarchitecture.internal.di.modules.ActivityModule;
 import com.yalin.cleanarchitecture.navigation.Navigator;
 
 import javax.inject.Inject;
@@ -51,5 +52,9 @@ public class BaseActivity extends AppCompatActivity {
 
     protected ApplicationComponent getApplicationComponent() {
         return ((AndroidApplication) getApplication()).getApplicationComponent();
+    }
+
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
     }
 }

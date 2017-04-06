@@ -16,32 +16,16 @@
 
 package com.yalin.cleanarchitecture.internal.di.modules;
 
-import android.content.Context;
-
-import com.yalin.cleanarchitecture.AndroidApplication;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
-import dagger.Provides;
 
 /**
- * Dagger module that provides objects which will live during the application lifecycle.
+ * Dagger module that provides user related collaborators.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
 @Module
-public class ApplicationModule {
-    private final AndroidApplication application;
-
-    public ApplicationModule(AndroidApplication application) {
-        this.application = application;
-    }
-
-    @Provides
-    @Singleton
-    public Context provideApplicationContext() {
-        return this.application;
+public class UserModule {
+    public UserModule() {
     }
 }

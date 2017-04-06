@@ -16,32 +16,33 @@
 
 package com.yalin.cleanarchitecture.internal.di.modules;
 
-import android.content.Context;
+import android.app.Activity;
 
-import com.yalin.cleanarchitecture.AndroidApplication;
-
-import javax.inject.Singleton;
+import com.yalin.cleanarchitecture.internal.di.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;
 
 /**
- * Dagger module that provides objects which will live during the application lifecycle.
+ * A module to wrap the Activity state and expose it to the graph.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
 @Module
-public class ApplicationModule {
-    private final AndroidApplication application;
+public class ActivityModule {
+    private Activity activity;
 
-    public ApplicationModule(AndroidApplication application) {
-        this.application = application;
+    public ActivityModule(Activity activity) {
+        this.activity = activity;
     }
 
+    /**
+     * Expose the activity to dependents in the graph.
+     */
     @Provides
-    @Singleton
-    public Context provideApplicationContext() {
-        return this.application;
+    @PerActivity
+    Activity activity() {
+        return this.activity;
     }
 }

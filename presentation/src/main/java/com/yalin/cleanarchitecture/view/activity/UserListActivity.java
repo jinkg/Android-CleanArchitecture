@@ -22,21 +22,46 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.yalin.cleanarchitecture.R;
+import com.yalin.cleanarchitecture.internal.di.HasComponent;
+import com.yalin.cleanarchitecture.internal.di.components.DaggerApplicationComponent;
+import com.yalin.cleanarchitecture.internal.di.components.DaggerUserComponent;
+import com.yalin.cleanarchitecture.internal.di.components.UserComponent;
+import com.yalin.cleanarchitecture.view.fragment.UserListFragment;
 
 /**
  * @author jinyalin
  * @since 2017/4/6.
  */
 
-public class UserListActivity extends BaseActivity {
+public class UserListActivity extends BaseActivity implements HasComponent<UserComponent> {
 
     public static Intent getCallingIntent(Activity activity) {
         return new Intent(activity, UserListActivity.class);
     }
 
+    private UserComponent userComponent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout);
+
+        initializeInjector();
+
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, new UserListFragment());
+        }
+    }
+
+    private void initializeInjector() {
+        userComponent = DaggerUserComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
+
+    @Override
+    public UserComponent getComponent() {
+        return userComponent;
     }
 }
