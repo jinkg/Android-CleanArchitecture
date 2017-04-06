@@ -13,6 +13,7 @@ android {
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
         testApplicationId rootProject.ext.testApplicationId
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,12 +25,16 @@ android {
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
 
+    annotationProcessor presentationDependencies.daggerCompiler
+    annotationProcessor presentationDependencies.butterknifeCompiler
+
+    compile presentationDependencies.supportLib
+    compile presentationDependencies.constraintLayout
+    compile presentationDependencies.dagger
+    compile presentationDependencies.butterknife
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile presentationDependencies.supportLib
-    compile presentationDependencies.constraintLayout
-    compile presentationDependencies.daggerCompiler
-    compile presentationDependencies.dagger
     testCompile 'junit:junit:4.12'
 }

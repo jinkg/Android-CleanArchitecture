@@ -12,12 +12,15 @@ ext {
     constraintLayoutVersion = '1.0.2'
 
     //ThirdPart
-    daggerVersion = '2.8'
+    daggerVersion = '2.10'
+    butterknifeVersion = '8.5.1'
 
     presentationDependencies = [
-            supportLib      : "com.android.support:appcompat-v7:${androidSupportVersion}",
-            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
-            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger          : "com.google.dagger:dagger:${daggerVersion}"
+            supportLib         : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            dagger             : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
+            butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
     ]
 }

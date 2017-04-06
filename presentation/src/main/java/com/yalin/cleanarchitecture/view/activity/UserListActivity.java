@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.navigation;
+package com.yalin.cleanarchitecture.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
-import com.yalin.cleanarchitecture.view.activity.UserListActivity;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.yalin.cleanarchitecture.R;
 
 /**
  * @author jinyalin
- * @since 2017/4/5.
+ * @since 2017/4/6.
  */
-@Singleton
-public class Navigator {
-    @Inject
-    public Navigator() {
+
+public class UserListActivity extends BaseActivity {
+
+    public static Intent getCallingIntent(Activity activity) {
+        return new Intent(activity, UserListActivity.class);
     }
 
-    public void navigateToUserList(Activity activity) {
-        if (activity != null) {
-            Intent intent = UserListActivity.getCallingIntent(activity);
-            activity.startActivity(intent);
-        }
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_layout);
     }
 }

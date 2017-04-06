@@ -14,30 +14,32 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.navigation;
+package com.yalin.cleanarchitecture.internal.di.modules;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 
-import com.yalin.cleanarchitecture.view.activity.UserListActivity;
+import com.yalin.cleanarchitecture.AndroidApplication;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 
 /**
  * @author jinyalin
- * @since 2017/4/5.
+ * @since 2017/4/6.
  */
-@Singleton
-public class Navigator {
-    @Inject
-    public Navigator() {
+@Module
+public class ApplicationModule {
+    private final AndroidApplication application;
+
+    public ApplicationModule(AndroidApplication application) {
+        this.application = application;
     }
 
-    public void navigateToUserList(Activity activity) {
-        if (activity != null) {
-            Intent intent = UserListActivity.getCallingIntent(activity);
-            activity.startActivity(intent);
-        }
+    @Provides
+    @Singleton
+    public Context provideApplicationContext() {
+        return this.application;
     }
 }
