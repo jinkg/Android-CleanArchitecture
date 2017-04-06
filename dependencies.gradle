@@ -1,0 +1,23 @@
+ext {
+    //Android
+    androidBuildToolsVersion = "25.0.2"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
+
+    //Libraries
+    recyclerViewVersion = '25.3.0'
+    androidAnnotationsVersion = '25.3.0'
+    androidSupportVersion = '25.3.0'
+    constraintLayoutVersion = '1.0.2'
+
+    //ThirdPart
+    daggerVersion = '2.8'
+
+    presentationDependencies = [
+            supportLib      : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger          : "com.google.dagger:dagger:${daggerVersion}"
+    ]
+}
