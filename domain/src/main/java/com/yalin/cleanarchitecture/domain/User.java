@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Class that represents a User in the domain layer.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
+
+public class User {
     private final int userId;
 
-    public UserModel(int userId) {
+    public User(int userId) {
         this.userId = userId;
     }
 

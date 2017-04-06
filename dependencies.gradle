@@ -14,6 +14,10 @@ ext {
     //ThirdPart
     daggerVersion = '2.10'
     butterknifeVersion = '8.5.1'
+    rxJavaVersion = '2.0.8'
+    rxAndroidVersion = '2.0.1'
+    javaxInjectVersion = '1'
+    arrowVersion = '1.0.0'
 
     presentationDependencies = [
             supportLib         : "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -22,6 +26,15 @@ ext {
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
-            butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+            butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
+            rxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    ]
+
+    domainDependencies = [
+            rxJava     : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid  : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}",
+            arrow      : "com.fernandocejas:arrow:${arrowVersion}"
     ]
 }

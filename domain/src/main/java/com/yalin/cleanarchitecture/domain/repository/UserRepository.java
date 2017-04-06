@@ -14,32 +14,30 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.repository;
+
+import com.yalin.cleanarchitecture.domain.User;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Interface that represents a Repository for getting {@link User} related data.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
+public interface UserRepository {
+    /**
+     * Get an {@link Observable} which will emit a List of {@link User}.
+     */
+    Observable<List<User>> users();
 
-    public UserModel(int userId) {
-        this.userId = userId;
-    }
-
-    private String fullName;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    /**
+     * Get an {@link Observable} which will emit a {@link User}.
+     *
+     * @param userId The user id used to retrieve user data.
+     */
+    Observable<User> user(final int userId);
 }

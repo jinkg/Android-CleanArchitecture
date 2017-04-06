@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.interactor;
+
+import io.reactivex.observers.DisposableObserver;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Default {@link DisposableObserver} base class to be used whenever you want default error handling.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
+public class DefaultObserver<T> extends DisposableObserver<T> {
+    @Override
+    public void onNext(T t) {
 
-    public UserModel(int userId) {
-        this.userId = userId;
     }
 
-    private String fullName;
+    @Override
+    public void onError(Throwable e) {
 
-    public int getUserId() {
-        return userId;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+    @Override
+    public void onComplete() {
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 }

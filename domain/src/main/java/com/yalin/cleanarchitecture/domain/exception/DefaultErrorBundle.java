@@ -14,32 +14,30 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.exception;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Wrapper around Exceptions used to manage default errors.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
+public class DefaultErrorBundle implements ErrorBundle {
+    private static final String DEFAULT_ERROR_MSG = "Unknown error";
 
-    public UserModel(int userId) {
-        this.userId = userId;
+    private final Exception exception;
+
+    public DefaultErrorBundle(Exception exception) {
+        this.exception = exception;
     }
 
-    private String fullName;
-
-    public int getUserId() {
-        return userId;
+    @Override
+    public Exception getException() {
+        return exception;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    @Override
+    public String getErrorMessage() {
+        return (exception != null) ? this.exception.getMessage() : DEFAULT_ERROR_MSG;
     }
 }

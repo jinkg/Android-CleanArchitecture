@@ -16,8 +16,20 @@
 
 package com.yalin.cleanarchitecture.presenter;
 
+import com.yalin.cleanarchitecture.domain.User;
+import com.yalin.cleanarchitecture.domain.exception.DefaultErrorBundle;
+import com.yalin.cleanarchitecture.domain.exception.ErrorBundle;
+import com.yalin.cleanarchitecture.domain.interactor.DefaultObserver;
+import com.yalin.cleanarchitecture.domain.interactor.GetUserList;
+import com.yalin.cleanarchitecture.domain.repository.UserRepository;
+import com.yalin.cleanarchitecture.exception.ErrorMessageFactory;
 import com.yalin.cleanarchitecture.internal.di.PerActivity;
+import com.yalin.cleanarchitecture.mapper.UserModelDataMapper;
+import com.yalin.cleanarchitecture.model.UserModel;
 import com.yalin.cleanarchitecture.view.UserListView;
+
+import java.util.Collection;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,8 +42,13 @@ public class UserListPresenter implements Presenter {
 
     private UserListView userListView;
 
+    private final GetUserList getUserListUseCase;
+    private final UserModelDataMapper userModelDataMapper;
+
     @Inject
-    public UserListPresenter() {
+    public UserListPresenter(GetUserList getUserList, UserModelDataMapper userModelDataMapper) {
+        this.getUserListUseCase = getUserList;
+        this.userModelDataMapper = userModelDataMapper;
     }
 
     public void setView(UserListView userListView) {
@@ -39,8 +56,13 @@ public class UserListPresenter implements Presenter {
     }
 
     public void initialize() {
+        loadUserList();
+    }
+
+    private void loadUserList() {
         hideViewRetry();
         showViewLoading();
+        getUserList();
     }
 
     @Override
@@ -72,5 +94,40 @@ public class UserListPresenter implements Presenter {
 
     private void hideViewRetry() {
         userListView.hideRetry();
+    }
+
+    private void showErrorMessage(ErrorBundle errorBundle) {
+        String errorMessage = ErrorMessageFactory.create(userListView.context(),
+                errorBundle.getException());
+        userListView.showError(errorMessage);
+    }
+
+    private void showUsersCollectionInView(Collection<User> userCollection) {
+        final Collection<UserModel> userModelsCollection =
+                userModelDataMapper.transform(userCollection);
+        userListView.renderUserList(userModelsCollection);
+    }
+
+    private void getUserList() {
+        getUserListUseCase.execute(new UserListObserver(), null);
+    }
+
+    private final class UserListObserver extends DefaultObserver<List<User>> {
+        @Override
+        public void onNext(List<User> users) {
+            UserListPresenter.this.showUsersCollectionInView(users);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            UserListPresenter.this.hideViewLoading();
+            UserListPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+            UserListPresenter.this.showViewRetry();
+        }
+
+        @Override
+        public void onComplete() {
+            UserListPresenter.this.hideViewLoading();
+        }
     }
 }

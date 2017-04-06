@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.executor;
+
+import java.util.concurrent.Executor;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Executor implementation can be based on different frameworks or techniques of asynchronous
+ * execution, but every implementation will execute the
+ * {@link com.yalin.cleanarchitecture.domain.interactor.UseCase} out of the UI thread.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
 
-    public UserModel(int userId) {
-        this.userId = userId;
-    }
-
-    private String fullName;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+public interface ThreadExecutor extends Executor {
 }

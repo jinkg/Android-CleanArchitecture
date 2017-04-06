@@ -6,5 +6,9 @@ sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    def domainDependencies = rootProject.ext.domainDependencies
+
+    compile domainDependencies.rxJava
+    compile domainDependencies.javaxInject
+    compile domainDependencies.arrow
 }

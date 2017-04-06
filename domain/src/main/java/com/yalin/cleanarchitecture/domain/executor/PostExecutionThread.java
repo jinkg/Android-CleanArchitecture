@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.executor;
+
+import io.reactivex.Scheduler;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Thread abstraction created to change the execution context from any thread to any other thread.
+ * Useful to encapsulate a UI Thread for example, since some job will be done in background, an
+ * implementation of this interface will change context and update the UI.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
-
-    public UserModel(int userId) {
-        this.userId = userId;
-    }
-
-    private String fullName;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+public interface PostExecutionThread {
+    Scheduler getScheduler();
 }

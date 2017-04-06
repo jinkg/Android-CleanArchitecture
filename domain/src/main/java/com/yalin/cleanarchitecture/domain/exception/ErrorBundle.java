@@ -14,32 +14,17 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.model;
+package com.yalin.cleanarchitecture.domain.exception;
 
 /**
- * Class that represents a user in the presentation layer.
+ * Interface to represent a wrapper around an {@link java.lang.Exception} to manage errors.
  *
  * @author jinyalin
  * @since 2017/4/6.
  */
-public class UserModel {
-    private final int userId;
 
-    public UserModel(int userId) {
-        this.userId = userId;
-    }
+public interface ErrorBundle {
+    Exception getException();
 
-    private String fullName;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    String getErrorMessage();
 }

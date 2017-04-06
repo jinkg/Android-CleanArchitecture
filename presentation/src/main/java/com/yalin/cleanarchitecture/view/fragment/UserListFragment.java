@@ -39,6 +39,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Fragment that shows a list of Users.
@@ -61,6 +62,8 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Inject
     UserListPresenter userListPresenter;
 
+    private Unbinder unbinder;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_user_list, container, false);
-        ButterKnife.bind(this, fragmentView);
+        unbinder = ButterKnife.bind(this, fragmentView);
         setupRecyclerView();
         return fragmentView;
     }
@@ -84,6 +87,30 @@ public class UserListFragment extends BaseFragment implements UserListView {
         if (savedInstanceState == null) {
             loadUserList();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userListPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        userListPresenter.pause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        userListPresenter.destroy();
     }
 
     private void setupRecyclerView() {
