@@ -19,6 +19,14 @@ package com.yalin.cleanarchitecture.internal.di.modules;
 import android.content.Context;
 
 import com.yalin.cleanarchitecture.AndroidApplication;
+import com.yalin.cleanarchitecture.UIThread;
+import com.yalin.cleanarchitecture.data.cache.UserCache;
+import com.yalin.cleanarchitecture.data.cache.UserCacheImpl;
+import com.yalin.cleanarchitecture.data.executor.JobExecutor;
+import com.yalin.cleanarchitecture.data.repository.UserDataRepository;
+import com.yalin.cleanarchitecture.domain.executor.PostExecutionThread;
+import com.yalin.cleanarchitecture.domain.executor.ThreadExecutor;
+import com.yalin.cleanarchitecture.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
 
@@ -41,7 +49,31 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public Context provideApplicationContext() {
+    Context provideApplicationContext() {
         return this.application;
+    }
+
+    @Provides
+    @Singleton
+    ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
+        return jobExecutor;
+    }
+
+    @Provides
+    @Singleton
+    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
+        return uiThread;
+    }
+
+    @Provides
+    @Singleton
+    UserCache provideUserCache(UserCacheImpl userCache) {
+        return userCache;
+    }
+
+    @Provides
+    @Singleton
+    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+        return userDataRepository;
     }
 }

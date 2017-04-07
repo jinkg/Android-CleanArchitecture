@@ -32,6 +32,7 @@ import com.yalin.cleanarchitecture.internal.di.components.UserComponent;
 import com.yalin.cleanarchitecture.model.UserModel;
 import com.yalin.cleanarchitecture.presenter.UserListPresenter;
 import com.yalin.cleanarchitecture.view.UserListView;
+import com.yalin.cleanarchitecture.view.adapter.UsersAdapter;
 
 import java.util.Collection;
 
@@ -61,6 +62,8 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     @Inject
     UserListPresenter userListPresenter;
+    @Inject
+    UsersAdapter usersAdapter;
 
     private Unbinder unbinder;
 
@@ -115,11 +118,14 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(usersAdapter);
     }
 
     @Override
     public void renderUserList(Collection<UserModel> userModelCollection) {
-
+        if (userModelCollection != null) {
+            usersAdapter.setUserCollection(userModelCollection);
+        }
     }
 
     @Override

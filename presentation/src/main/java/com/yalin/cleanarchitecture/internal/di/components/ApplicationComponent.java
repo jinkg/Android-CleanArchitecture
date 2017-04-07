@@ -18,6 +18,9 @@ package com.yalin.cleanarchitecture.internal.di.components;
 
 import android.content.Context;
 
+import com.yalin.cleanarchitecture.domain.executor.PostExecutionThread;
+import com.yalin.cleanarchitecture.domain.executor.ThreadExecutor;
+import com.yalin.cleanarchitecture.domain.repository.UserRepository;
 import com.yalin.cleanarchitecture.internal.di.modules.ApplicationModule;
 import com.yalin.cleanarchitecture.view.activity.BaseActivity;
 
@@ -27,6 +30,8 @@ import dagger.Component;
 
 
 /**
+ * A component whose lifetime is the life of the application.
+ *
  * @author jinyalin
  * @since 2017/4/6.
  */
@@ -36,4 +41,10 @@ public interface ApplicationComponent {
     void inject(BaseActivity activity);
 
     Context context();
+
+    ThreadExecutor threadExecutor();
+
+    PostExecutionThread postExecutionThread();
+
+    UserRepository userRepository();
 }

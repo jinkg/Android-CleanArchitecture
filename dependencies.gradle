@@ -37,4 +37,10 @@ ext {
             javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}",
             arrow      : "com.fernandocejas:arrow:${arrowVersion}"
     ]
+
+    dataDependencies = [
+            androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
+            rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    ]
 }
