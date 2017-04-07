@@ -24,6 +24,7 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply from: '../local_maven.gradle'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
