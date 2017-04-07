@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/tv_fullname"
-        style="@style/AppTheme.TextViewHeader"
+        style="@style/CleanArchitectureAppTheme.TextViewHeader"
         android:freezesText="true" />
 
 </LinearLayout>

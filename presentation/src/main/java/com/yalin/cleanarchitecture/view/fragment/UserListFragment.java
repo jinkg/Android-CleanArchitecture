@@ -52,7 +52,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
         void onUserClick(UserModel userModel);
     }
 
-    @BindView(R.id.rv_users)
     RecyclerView recyclerView;
     RelativeLayout rlProgress;
     RelativeLayout rlRetry;
@@ -69,6 +68,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
         setRetainInstance(true);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -99,6 +99,13 @@ public class UserListFragment extends BaseFragment implements UserListView {
         rlProgress = (RelativeLayout) fragmentView.findViewById(R.id.rl_progress);
         rlRetry = (RelativeLayout) fragmentView.findViewById(R.id.rl_retry);
         btnRetry = (Button) fragmentView.findViewById(R.id.bt_retry);
+
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadUserList();
+            }
+        });
     }
 
     @Override
@@ -194,11 +201,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
      */
     private void loadUserList() {
         userListPresenter.initialize();
-    }
-
-    @OnClick(R.id.bt_retry)
-    void onButtonRetryClick() {
-        loadUserList();
     }
 
     private UsersAdapter.OnItemClickListener onItemClickListener = new UsersAdapter.OnItemClickListener() {

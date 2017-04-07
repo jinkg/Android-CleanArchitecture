@@ -18,16 +18,15 @@
     package="com.yalin.cleanarchitecture">
 
     <application>
-        <activity android:name=".view.activity.MainActivity"/>
+        <activity android:name=".view.activity.MainActivity" />
 
         <activity
             android:name=".view.activity.UserListActivity"
             android:label="@string/clean_architecture_user_list" />
-            android:label="@string/user_list" />
 
         <activity
             android:name=".view.activity.UserDetailsActivity"
-            android:label="@string/user_detail" />
+            android:label="@string/clean_architecture_user_detail" />
     </application>
 
 </manifest>

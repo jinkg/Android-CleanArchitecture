@@ -1,7 +1,7 @@
 <resources>
     <string name="clean_architecture_app_name">CleanArchitecture</string>
     <string name="clean_architecture_user_list">Users List</string>
-    <string name="user_detail">Users Detail</string>
+    <string name="clean_architecture_user_detail">Users Detail</string>
 
     <string name="clean_architecture_show_user_list">Show User List!</string>
     <string name="clean_architecture_btn_text_retry">Retry</string>

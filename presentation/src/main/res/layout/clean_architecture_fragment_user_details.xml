@@ -17,10 +17,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/view_user_details" />
+    <include layout="@layout/clean_architecture_view_user_details" />
 
-    <include layout="@layout/view_progress" />
+    <include layout="@layout/clean_architecture_view_progress" />
 
-    <include layout="@layout/view_retry" />
+    <include layout="@layout/clean_architecture_view_retry" />
 
 </RelativeLayout>

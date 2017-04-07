@@ -27,8 +27,6 @@ import com.yalin.cleanarchitecture.internal.di.components.DaggerUserComponent;
 import com.yalin.cleanarchitecture.internal.di.components.UserComponent;
 import com.yalin.cleanarchitecture.view.fragment.UserDetailsFragment;
 
-import butterknife.ButterKnife;
-
 /**
  * @author jinyalin
  * @since 2017/4/7.
@@ -50,8 +48,7 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout);
-        ButterKnife.bind(this);
+        setContentView(R.layout.clean_architecture_activity_layout);
 
         initializeActivity(savedInstanceState);
         initializeInjector();

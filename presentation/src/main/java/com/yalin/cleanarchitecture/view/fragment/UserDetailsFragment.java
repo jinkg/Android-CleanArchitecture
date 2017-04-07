@@ -36,11 +36,6 @@ import com.yalin.cleanarchitecture.view.UserDetailsView;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
 /**
  * @author jinyalin
  * @since 2017/4/6.
@@ -49,21 +44,14 @@ import butterknife.Unbinder;
 public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
     private static final String PARAM_USER_ID = "param_user_id";
 
-    @BindView(R.id.iv_cover)
     ImageView ivCover;
-    @BindView(R.id.tv_fullname)
     TextView tvFullName;
-    @BindView(R.id.rl_progress)
     RelativeLayout rlProgress;
-    @BindView(R.id.rl_retry)
     RelativeLayout rlRetry;
-    @BindView(R.id.bt_retry)
     Button btnRetry;
 
     @Inject
     UserDetailsPresenter userDetailsPresenter;
-
-    private Unbinder unbinder;
 
     public static UserDetailsFragment forUser(int userId) {
         UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
@@ -87,10 +75,27 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_user_details, container, false);
-        unbinder = ButterKnife.bind(this, fragmentView);
+        View fragmentView = inflater.inflate(R.layout.clean_architecture_fragment_user_details,
+                container, false);
+        findView(fragmentView);
         return fragmentView;
     }
+
+    private void findView(View fragmentView) {
+        ivCover = (ImageView) fragmentView.findViewById(R.id.iv_cover);
+        tvFullName = (TextView) fragmentView.findViewById(R.id.tv_fullname);
+        rlProgress = (RelativeLayout) fragmentView.findViewById(R.id.rl_progress);
+        rlRetry = (RelativeLayout) fragmentView.findViewById(R.id.rl_retry);
+        btnRetry = (Button) fragmentView.findViewById(R.id.bt_retry);
+
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadUserDetails();
+            }
+        });
+    }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -122,7 +127,6 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
@@ -168,10 +172,5 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
     private void loadUserDetails() {
         userDetailsPresenter.initialize(currentUserId());
-    }
-
-    @OnClick(R.id.bt_retry)
-    void onButtonRetryClick() {
-        loadUserDetails();
     }
 }
