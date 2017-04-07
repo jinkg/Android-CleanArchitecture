@@ -47,7 +47,7 @@ public interface UserCache {
      * @param userId The id used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
-    boolean isChached(final int userId);
+    boolean isCached(final int userId);
 
     /**
      * Checks if the cache is expired.

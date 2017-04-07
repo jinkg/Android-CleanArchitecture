@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CleanArchitecture</string>
     <string name="user_list">Users List</string>
+    <string name="user_detail">Users Detail</string>
 
     <string name="show_user_list">Show User List!</string>
     <string name="btn_text_retry">Retry</string>

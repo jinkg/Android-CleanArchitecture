@@ -21,7 +21,6 @@ import com.yalin.cleanarchitecture.domain.exception.DefaultErrorBundle;
 import com.yalin.cleanarchitecture.domain.exception.ErrorBundle;
 import com.yalin.cleanarchitecture.domain.interactor.DefaultObserver;
 import com.yalin.cleanarchitecture.domain.interactor.GetUserList;
-import com.yalin.cleanarchitecture.domain.repository.UserRepository;
 import com.yalin.cleanarchitecture.exception.ErrorMessageFactory;
 import com.yalin.cleanarchitecture.internal.di.PerActivity;
 import com.yalin.cleanarchitecture.mapper.UserModelDataMapper;
@@ -77,7 +76,12 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void destroy() {
+        getUserListUseCase.dispose();
         userListView = null;
+    }
+
+    public void onUserClick(UserModel userModel) {
+        userListView.viewUser(userModel);
     }
 
     private void showViewLoading() {

@@ -44,6 +44,7 @@ class DiskUserDataStore implements UserDataStore {
     @Override
     public Observable<UserEntity> userEntityDetails(int userId) {
         return Observable.create(emitter -> {
+            Thread.sleep(1500);
             UserEntity userEntity = new UserEntity(userId);
             userEntity.setFullName("Full Name " + userId);
             emitter.onNext(userEntity);

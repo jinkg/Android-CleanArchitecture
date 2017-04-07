@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yalin.cleanarchitecture.R;
-import com.yalin.cleanarchitecture.domain.User;
 import com.yalin.cleanarchitecture.model.UserModel;
 
 import java.util.Collection;
@@ -44,8 +43,14 @@ import butterknife.ButterKnife;
  */
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
+    public interface OnItemClickListener {
+        void onUserItemClick(UserModel userModel);
+    }
+
     private List<UserModel> userModelList;
     private final LayoutInflater layoutInflater;
+
+    private OnItemClickListener onItemClickListener;
 
     @Inject
     UsersAdapter(Context context) {
@@ -61,7 +66,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        holder.titleTextView.setText(userModelList.get(position).getFullName());
+        final UserModel userModel = userModelList.get(position);
+        holder.titleTextView.setText(userModel.getFullName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onUserItemClick(userModel);
+                }
+            }
+        });
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public void setUserCollection(Collection<UserModel> userCollection) {

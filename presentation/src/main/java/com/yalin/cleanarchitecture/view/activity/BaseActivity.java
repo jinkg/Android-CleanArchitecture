@@ -34,7 +34,7 @@ import javax.inject.Inject;
  * @since 2017/4/5.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     @Inject
     Navigator navigator;
 

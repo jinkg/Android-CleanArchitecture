@@ -23,35 +23,57 @@ import android.support.annotation.Nullable;
 
 import com.yalin.cleanarchitecture.R;
 import com.yalin.cleanarchitecture.internal.di.HasComponent;
-import com.yalin.cleanarchitecture.internal.di.components.DaggerApplicationComponent;
 import com.yalin.cleanarchitecture.internal.di.components.DaggerUserComponent;
 import com.yalin.cleanarchitecture.internal.di.components.UserComponent;
-import com.yalin.cleanarchitecture.model.UserModel;
-import com.yalin.cleanarchitecture.view.fragment.UserListFragment;
+import com.yalin.cleanarchitecture.view.fragment.UserDetailsFragment;
+
+import butterknife.ButterKnife;
 
 /**
  * @author jinyalin
- * @since 2017/4/6.
+ * @since 2017/4/7.
  */
+public class UserDetailsActivity extends BaseActivity implements HasComponent<UserComponent> {
 
-public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
-        UserListFragment.UserListListener {
+    private static final String INTENT_EXTRA_PARAM_USER_ID = "com.yalin.INTENT_PARAM_USER_ID";
+    private static final String STATE_PARAM_USER_ID = "com.yalin.STATE_PARAM_USER_ID";
 
-    public static Intent getCallingIntent(Activity activity) {
-        return new Intent(activity, UserListActivity.class);
+    public static Intent getCallingIntent(Activity activity, int userId) {
+        Intent callingIntent = new Intent(activity, UserDetailsActivity.class);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_USER_ID, userId);
+        return callingIntent;
     }
 
+    private int userId;
     private UserComponent userComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout);
+        ButterKnife.bind(this);
 
+        initializeActivity(savedInstanceState);
         initializeInjector();
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (outState != null) {
+            outState.putInt(STATE_PARAM_USER_ID, userId);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Initializes this activity.
+     */
+    private void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            addFragment(R.id.fragment_container, new UserListFragment());
+            userId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
+            addFragment(R.id.fragment_container, UserDetailsFragment.forUser(userId));
+        } else {
+            userId = savedInstanceState.getInt(STATE_PARAM_USER_ID);
         }
     }
 
@@ -65,10 +87,5 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     @Override
     public UserComponent getComponent() {
         return userComponent;
-    }
-
-    @Override
-    public void onUserClick(UserModel userModel) {
-        navigator.navigateToUserDetail(this, userModel.getUserId());
     }
 }
