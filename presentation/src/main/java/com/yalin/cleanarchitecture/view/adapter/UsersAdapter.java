@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yalin.cleanarchitecture.R;
-import com.yalin.cleanarchitecture.domain.User;
 import com.yalin.cleanarchitecture.model.UserModel;
 
 import java.util.Collection;
@@ -32,9 +31,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Adaptar that manages a collection of {@link UserModel}.
@@ -55,7 +51,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = layoutInflater.inflate(R.layout.row_user, parent, false);
+        final View view = layoutInflater.inflate(R.layout.clean_architecture_row_user, parent, false);
         return new UserViewHolder(view);
     }
 
@@ -82,12 +78,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title)
         TextView titleTextView;
 
         UserViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            titleTextView = (TextView) itemView.findViewById(R.id.title);
         }
     }
 }

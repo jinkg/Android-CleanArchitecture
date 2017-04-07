@@ -1,0 +1,41 @@
+<!--
+  ~ Copyright 2017 Yalin Jin
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yalin.cleanarchitecture.wrapper">
+
+    <application
+        android:name="com.yalin.cleanarchitecture.AndroidApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/clean_architecture_ic_launcher"
+        android:label="@string/clean_architecture_app_name"
+        android:roundIcon="@mipmap/clean_architecture_ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/CleanArchitectureAppTheme">
+        <activity android:name="com.yalin.cleanarchitecture.view.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.yalin.cleanarchitecture.view.activity.UserListActivity"
+            android:label="@string/clean_architecture_user_list" />
+    </application>
+
+</manifest>

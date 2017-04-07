@@ -14,13 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest package="com.yalin.cleanarchitecture.data">
 
-    package="com.yalin.cleanarchitecture.data">
-
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:supportsRtl="true">
-
-    </application>
-
+    <application />
 </manifest>

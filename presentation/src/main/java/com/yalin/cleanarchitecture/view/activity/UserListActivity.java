@@ -23,7 +23,6 @@ import android.support.annotation.Nullable;
 
 import com.yalin.cleanarchitecture.R;
 import com.yalin.cleanarchitecture.internal.di.HasComponent;
-import com.yalin.cleanarchitecture.internal.di.components.DaggerApplicationComponent;
 import com.yalin.cleanarchitecture.internal.di.components.DaggerUserComponent;
 import com.yalin.cleanarchitecture.internal.di.components.UserComponent;
 import com.yalin.cleanarchitecture.view.fragment.UserListFragment;
@@ -44,7 +43,7 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout);
+        setContentView(R.layout.clean_architecture_activity_layout);
 
         initializeInjector();
 

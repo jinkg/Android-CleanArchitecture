@@ -38,10 +38,6 @@ import java.util.Collection;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Fragment that shows a list of Users.
  *
@@ -51,21 +47,15 @@ import butterknife.Unbinder;
 
 public class UserListFragment extends BaseFragment implements UserListView {
 
-    @BindView(R.id.rv_users)
     RecyclerView recyclerView;
-    @BindView(R.id.rl_progress)
     RelativeLayout rlProgress;
-    @BindView(R.id.rl_retry)
     RelativeLayout rlRetry;
-    @BindView(R.id.bt_retry)
     Button btnRetry;
 
     @Inject
     UserListPresenter userListPresenter;
     @Inject
     UsersAdapter usersAdapter;
-
-    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +67,18 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
-        final View fragmentView = inflater.inflate(R.layout.fragment_user_list, container, false);
-        unbinder = ButterKnife.bind(this, fragmentView);
+        final View fragmentView =
+                inflater.inflate(R.layout.clean_architecture_fragment_user_list, container, false);
+        findView(fragmentView);
         setupRecyclerView();
         return fragmentView;
+    }
+
+    private void findView(View fragmentView) {
+        recyclerView = (RecyclerView) fragmentView.findViewById(R.id.rv_users);
+        rlProgress = (RelativeLayout) fragmentView.findViewById(R.id.rl_progress);
+        rlRetry = (RelativeLayout) fragmentView.findViewById(R.id.rl_retry);
+        btnRetry = (Button) fragmentView.findViewById(R.id.bt_retry);
     }
 
     @Override
@@ -107,7 +105,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

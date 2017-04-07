@@ -1,5 +1,5 @@
 apply plugin: 'java'
-
+apply from: '../local_maven.gradle'
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = "1.7"
 //noinspection GroovyUnusedAssignment

@@ -13,29 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
 
-def GROUP_ID = 'com.yalin.open'
-def ARTiFACT_ID = project.name
-def ARTiFACT_VERSION = 'yalin-SNAPSHOT'
-def REPO_KEY = 'Android-Clean-Architecture'
-def CONTEXT_URL = 'http://localhost:8081/artifactory'
-def USERNAME = hasProperty('username') ? getProperty('username') : ""
-def PASSWORD = hasProperty('password') ? getProperty('password') : ""
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def GROUP_ID = properties.get('GROUP_ID')
+def ARTIFACT_ID = 'clean-architecture-' + project.name
+def ARTIFACT_VERSION = properties.get('ARTIFACT_VERSION')
+def REPO_KEY = properties.get('REPO_KEY')
+def CONTEXT_URL = properties.get('CONTEXT_URL')
+def USERNAME = properties.get('USERNAME')
+def PASSWORD = properties.get('PASSWORD')
 
 publishing {
     publications {
-        aar(MavenPublication) {
-            groupId = GROUP_ID
-            artifactId = ARTiFACT_ID
-            version = ARTiFACT_VERSION
-            artifact project.name == 'presentation' ? "${project.buildDir}/outputs/aar/${project.name}-presentationPlugin-debug.aar"
-                    : "${project.buildDir}/outputs/aar/${project.name}-debug.aar"
+        if (project.name == 'domain') {
+            mavenJava(MavenPublication) {
+                groupId = GROUP_ID
+                artifactId = ARTIFACT_ID
+                version = ARTIFACT_VERSION
+
+                artifact "${project.buildDir}/libs/${project.name}.jar"
+
+            }
+        } else {
+            aar(MavenPublication) {
+                groupId = GROUP_ID
+                artifactId = ARTIFACT_ID
+                version = ARTIFACT_VERSION
+                if (project.name != 'domain') {
+                    artifact "${project.buildDir}/outputs/aar/${project.name}-debug.aar"
+                }
+            }
         }
     }
 }
+
 artifactory {
     contextUrl = CONTEXT_URL
     publish {
@@ -47,18 +62,9 @@ artifactory {
         }
         defaults {
             publishArtifacts = true
-            //这里的'aar'对应publishing任务中的'aar',任务名称可自定义
-            publications('aar')
-            publishPom = true //Publish generated POM files to Artifactory (true by default)
+            publications('mavenJava', 'aar')
+            publishPom = true
             publishIvy = false
-            //Publish generated Ivy descriptor files to Artifactory (true by default)
-        }
-    }
-    resolve {
-        repository {
-            repoKey = 'jcenter'
-            username = USERNAME
-            password = PASSWORD
         }
     }
 }

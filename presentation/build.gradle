@@ -1,10 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply from: '../local_maven.gradle'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
     defaultConfig {
-        applicationId rootProject.ext.androidApplicationId
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.androidVersionCode
@@ -29,13 +29,11 @@ dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
 
     annotationProcessor presentationDependencies.daggerCompiler
-    annotationProcessor presentationDependencies.butterknifeCompiler
 
     compile presentationDependencies.supportLib
     compile presentationDependencies.constraintLayout
     compile presentationDependencies.recyclerView
     compile presentationDependencies.dagger
-    compile presentationDependencies.butterknife
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
 

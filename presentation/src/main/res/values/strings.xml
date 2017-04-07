@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">CleanArchitecture</string>
-    <string name="user_list">Users List</string>
+    <string name="clean_architecture_app_name">CleanArchitecture</string>
+    <string name="clean_architecture_user_list">Users List</string>
 
-    <string name="show_user_list">Show User List!</string>
-    <string name="btn_text_retry">Retry</string>
+    <string name="clean_architecture_show_user_list">Show User List!</string>
+    <string name="clean_architecture_btn_text_retry">Retry</string>
 
     //Exception messages
-    <string name="exception_message_generic">There was an application error</string>
-    <string name="exception_message_no_connection">There is no internet connection</string>
-    <string name="exception_message_user_not_found">Cannot retrieve user data. Check your internet connection</string>
+    <string name="clean_architecture_exception_message_generic">There was an application error</string>
+    <string name="clean_architecture_exception_message_no_connection">There is no internet connection</string>
+    <string name="clean_architecture_exception_message_user_not_found">Cannot retrieve user data. Check your internet connection</string>
 </resources>

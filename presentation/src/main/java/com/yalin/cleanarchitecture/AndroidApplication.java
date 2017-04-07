@@ -28,12 +28,18 @@ import com.yalin.cleanarchitecture.internal.di.modules.ApplicationModule;
  */
 
 public class AndroidApplication extends Application {
+    private static AndroidApplication INSTANCE;
     private ApplicationComponent applicationComponent;
+
+    public static AndroidApplication getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         initializeInjector();
+        INSTANCE = this;
     }
 
     private void initializeInjector() {

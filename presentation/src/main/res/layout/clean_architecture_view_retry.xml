@@ -13,19 +13,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_retry"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_users"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
-
-    <include layout="@layout/view_progress" />
-
-    <include layout="@layout/view_retry" />
+    <Button
+        android:id="@+id/bt_retry"
+        style="@style/CleanArchitectureAppTheme.Button"
+        android:text="@string/clean_architecture_btn_text_retry" />
 
 </RelativeLayout>
