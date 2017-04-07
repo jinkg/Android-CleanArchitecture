@@ -46,7 +46,7 @@ public class UserCacheImpl implements UserCache {
     }
 
     @Override
-    public boolean isChached(int userId) {
+    public boolean isCached(int userId) {
         return false;
     }
 

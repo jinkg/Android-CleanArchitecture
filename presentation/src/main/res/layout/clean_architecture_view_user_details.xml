@@ -13,21 +13,20 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yalin.cleanarchitecture">
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray" />
 
-    <application>
-        <activity android:name=".view.activity.MainActivity"/>
+    <TextView
+        android:id="@+id/tv_fullname"
+        style="@style/AppTheme.TextViewHeader"
+        android:freezesText="true" />
 
-        <activity
-            android:name=".view.activity.UserListActivity"
-            android:label="@string/clean_architecture_user_list" />
-            android:label="@string/user_list" />
-
-        <activity
-            android:name=".view.activity.UserDetailsActivity"
-            android:label="@string/user_detail" />
-    </application>
-
-</manifest>
+</LinearLayout>

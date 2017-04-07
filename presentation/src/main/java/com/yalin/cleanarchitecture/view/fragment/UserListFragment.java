@@ -16,6 +16,7 @@
 
 package com.yalin.cleanarchitecture.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,6 +48,11 @@ import javax.inject.Inject;
 
 public class UserListFragment extends BaseFragment implements UserListView {
 
+    public interface UserListListener {
+        void onUserClick(UserModel userModel);
+    }
+
+    @BindView(R.id.rv_users)
     RecyclerView recyclerView;
     RelativeLayout rlProgress;
     RelativeLayout rlRetry;
@@ -56,6 +62,20 @@ public class UserListFragment extends BaseFragment implements UserListView {
     UserListPresenter userListPresenter;
     @Inject
     UsersAdapter usersAdapter;
+
+    private UserListListener userListListener;
+
+    public UserListFragment() {
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof UserListListener) {
+            userListListener = (UserListListener) activity;
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,7 +133,14 @@ public class UserListFragment extends BaseFragment implements UserListView {
         userListPresenter.destroy();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        userListListener = null;
+    }
+
     private void setupRecyclerView() {
+        usersAdapter.setOnItemClickListener(onItemClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(usersAdapter);
     }
@@ -127,7 +154,9 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     @Override
     public void viewUser(UserModel userModel) {
-
+        if (userListListener != null) {
+            userListListener.onUserClick(userModel);
+        }
     }
 
     @Override
@@ -166,4 +195,16 @@ public class UserListFragment extends BaseFragment implements UserListView {
     private void loadUserList() {
         userListPresenter.initialize();
     }
+
+    @OnClick(R.id.bt_retry)
+    void onButtonRetryClick() {
+        loadUserList();
+    }
+
+    private UsersAdapter.OnItemClickListener onItemClickListener = new UsersAdapter.OnItemClickListener() {
+        @Override
+        public void onUserItemClick(UserModel userModel) {
+            userListPresenter.onUserClick(userModel);
+        }
+    };
 }

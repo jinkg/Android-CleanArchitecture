@@ -19,7 +19,7 @@ package com.yalin.cleanarchitecture.internal.di.components;
 import com.yalin.cleanarchitecture.internal.di.PerActivity;
 import com.yalin.cleanarchitecture.internal.di.modules.ActivityModule;
 import com.yalin.cleanarchitecture.internal.di.modules.UserModule;
-import com.yalin.cleanarchitecture.view.fragment.UserDetailFragment;
+import com.yalin.cleanarchitecture.view.fragment.UserDetailsFragment;
 import com.yalin.cleanarchitecture.view.fragment.UserListFragment;
 
 import dagger.Component;
@@ -37,5 +37,5 @@ import dagger.Component;
 public interface UserComponent {
     void inject(UserListFragment userListFragment);
 
-    void inject(UserDetailFragment userDetailFragment);
+    void inject(UserDetailsFragment userDetailsFragment);
 }

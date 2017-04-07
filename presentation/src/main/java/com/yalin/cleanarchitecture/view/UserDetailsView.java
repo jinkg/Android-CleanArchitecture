@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-package com.yalin.cleanarchitecture.view.fragment;
+package com.yalin.cleanarchitecture.view;
+
+import com.yalin.cleanarchitecture.model.UserModel;
 
 /**
+ * Interface representing a View in a model view presenter (MVP) pattern.
+ * In this case is used as a view representing a user profile.
+ *
  * @author jinyalin
- * @since 2017/4/6.
+ * @since 2017/4/7.
  */
-
-public class UserDetailFragment extends BaseFragment {
+public interface UserDetailsView extends LoadDataView {
+    /**
+     * Render a user in the UI.
+     *
+     * @param user The {@link UserModel} that will be shown.
+     */
+    void renderUser(UserModel user);
 }

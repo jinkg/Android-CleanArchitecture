@@ -19,6 +19,7 @@ package com.yalin.cleanarchitecture.navigation;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.yalin.cleanarchitecture.view.activity.UserDetailsActivity;
 import com.yalin.cleanarchitecture.view.activity.UserListActivity;
 
 import javax.inject.Inject;
@@ -36,8 +37,15 @@ public class Navigator {
 
     public void navigateToUserList(Activity activity) {
         if (activity != null) {
-            Intent intent = UserListActivity.getCallingIntent(activity);
-            activity.startActivity(intent);
+            Intent intentToLaunch = UserListActivity.getCallingIntent(activity);
+            activity.startActivity(intentToLaunch);
+        }
+    }
+
+    public void navigateToUserDetail(Activity activity, int userId) {
+        if (activity != null) {
+            Intent intentToLaunch = UserDetailsActivity.getCallingIntent(activity, userId);
+            activity.startActivity(intentToLaunch);
         }
     }
 }

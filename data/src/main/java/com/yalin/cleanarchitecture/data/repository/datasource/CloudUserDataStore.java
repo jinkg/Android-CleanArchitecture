@@ -20,6 +20,7 @@ import com.yalin.cleanarchitecture.data.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import io.reactivex.Observable;
 
@@ -32,15 +33,21 @@ class CloudUserDataStore implements UserDataStore {
     @Override
     public Observable<List<UserEntity>> userEntityList() {
         return Observable.create(emitter -> {
-            Thread.sleep(3000);
-            emitter.onNext(getMockData());
-            emitter.onComplete();
+            Thread.sleep(2000);
+            int random = new Random().nextInt(3);
+            if (random % 3 == 0) {
+                emitter.onError(new Exception("Network error."));
+            } else {
+                emitter.onNext(getMockData());
+                emitter.onComplete();
+            }
         });
     }
 
     @Override
     public Observable<UserEntity> userEntityDetails(int userId) {
         return Observable.create(emitter -> {
+            Thread.sleep(1500);
             UserEntity userEntity = new UserEntity(userId);
             userEntity.setFullName("Full Name " + userId);
             emitter.onNext(userEntity);
