@@ -22,8 +22,8 @@ def ARTiFACT_ID = project.name
 def ARTiFACT_VERSION = 'yalin-SNAPSHOT'
 def REPO_KEY = 'Android-Clean-Architecture'
 def CONTEXT_URL = 'http://localhost:8081/artifactory'
-def USERNAME = 'admin'
-def PASSWORD = 'password'
+def USERNAME = hasProperty('username') ? getProperty('username') : ""
+def PASSWORD = hasProperty('password') ? getProperty('password') : ""
 
 publishing {
     publications {
